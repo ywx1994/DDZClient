@@ -9,14 +9,11 @@ cc.Class({
         playerName: cc.Label,
         playerID: cc.Label,
         daimondNum: cc.Label,
-        goldNum: cc.Label,
         male: cc.SpriteFrame,
         famale: cc.SpriteFrame,
 
-        clubNode: cc.Node,
         createRoomNode: cc.Node,
         joinRoomNode: cc.Node,
-        goldRoomNode: cc.Node,
         createRoomPrefab: cc.Prefab,
         joinRoomPrefab: cc.Prefab,
 
@@ -103,7 +100,6 @@ cc.Class({
                     this.headImg.node.scale = oldWidth / newWidth;
                 });
                 this.daimondNum.string = global.playerData.daimond_count;
-                this.goldNum.string = global.playerData.gold_count;
                 if (global.playerData.sex === 1) {
                     this.sexImg.spriteFrame = this.male;
                 } else {
@@ -142,22 +138,22 @@ cc.Class({
 
     start() {
         //---------------------产生动态界面的效果-----------------------
-        let action1 = cc.moveBy(1.3, 0, 10);
-        let action2 = cc.moveBy(1.3, 0, -10);
-        let action3 = cc.moveBy(1.3, 0, 10);
-        let action4 = cc.moveBy(1.3, 0, -10);
-        let action5 = cc.moveBy(1.3, 0, 10);
-        let action6 = cc.moveBy(1.3, 0, -10);
-        let action7 = cc.moveBy(1.3, 0, 10);
-        let action8 = cc.moveBy(1.3, 0, -10);
-        let seq1 = cc.repeatForever(cc.sequence(action1, action2));
-        let seq2 = cc.repeatForever(cc.sequence(action4, action3));
-        let seq3 = cc.repeatForever(cc.sequence(action5, action6));
-        let seq4 = cc.repeatForever(cc.sequence(action8, action7));
-        this.clubNode.runAction(seq1);
-        this.goldRoomNode.runAction(seq3);
-        this.createRoomNode.runAction(seq2);
-        this.joinRoomNode.runAction(seq4);
+        // let action1 = cc.moveBy(1.3, 0, 10);
+        // let action2 = cc.moveBy(1.3, 0, -10);
+        // let action3 = cc.moveBy(1.3, 0, 10);
+        // let action4 = cc.moveBy(1.3, 0, -10);
+        // let action5 = cc.moveBy(1.3, 0, 10);
+        // let action6 = cc.moveBy(1.3, 0, -10);
+        // let action7 = cc.moveBy(1.3, 0, 10);
+        // let action8 = cc.moveBy(1.3, 0, -10);
+        // let seq1 = cc.repeatForever(cc.sequence(action1, action2));
+        // let seq2 = cc.repeatForever(cc.sequence(action4, action3));
+        // let seq3 = cc.repeatForever(cc.sequence(action5, action6));
+        // let seq4 = cc.repeatForever(cc.sequence(action8, action7));
+        // this.clubNode.runAction(seq1);
+        // this.goldRoomNode.runAction(seq3);
+        // this.createRoomNode.runAction(seq2);
+        // this.joinRoomNode.runAction(seq4);
         //---------------------产生动态界面的效果end-----------------------
     },
 
@@ -171,11 +167,6 @@ cc.Class({
     onButtonClick(event, customData) {
         cc.audioEngine.play(cc.url.raw('resources/audio/click.mp3'), false, global.playVolume);
         switch (customData) {
-            case 'join_club':       //俱乐部
-                let tips = cc.instantiate(this.tipsPrefab);
-                tips.parent = this.node;
-                global.tip = "努力开发中";
-                break;
             case  'creat_room':     //创建房间
                 console.log("创建房间");
                 let createRoom = cc.instantiate(this.createRoomPrefab);
@@ -185,11 +176,6 @@ cc.Class({
                 console.log("加入房间");
                 let joinRoom = cc.instantiate(this.joinRoomPrefab);
                 joinRoom.parent = this.node;
-                break;
-            case 'gold_room':       //金币场
-                tips = cc.instantiate(this.tipsPrefab);
-                tips.parent = this.node;
-                global.tip = "尽情期待";
                 break;
             case 'room_list':       //房间列表
                 console.log("房间列表");
@@ -213,9 +199,6 @@ cc.Class({
                     this.roomListNode.runAction(cc.moveBy(0.3, 630, 0));
                     this.roomListBG.active = true;
                 }
-                break;
-            case 'sign_in':         //签到
-                console.log("签到");
                 break;
             case 'player_info':     //玩家信息
                 console.log("玩家信息");
