@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "7e753666-ed05-447f-8d5c-8e98df752b9f",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "robBanker": {
+      "ver": "1.0.3",
+      "uuid": "d12a0f14-0098-4fca-9a28-bdd804d96e15",
+      "rawTextureUuid": "7e753666-ed05-447f-8d5c-8e98df752b9f",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 48,
+      "height": 418,
+      "rawWidth": 48,
+      "rawHeight": 418,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

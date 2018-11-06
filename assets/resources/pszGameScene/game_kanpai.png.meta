@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "c4927157-6ebe-4e03-aa26-fcd7ef881533",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "game_kanpai": {
+      "ver": "1.0.3",
+      "uuid": "01d6e65a-eca0-4dcd-977c-837077635021",
+      "rawTextureUuid": "c4927157-6ebe-4e03-aa26-fcd7ef881533",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 2,
+      "trimY": 2,
+      "width": 96,
+      "height": 49,
+      "rawWidth": 100,
+      "rawHeight": 53,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

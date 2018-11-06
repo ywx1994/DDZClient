@@ -1,0 +1,33 @@
+{
+  "appKey": "4EF49F4D-3BCD-4AAE-B585-79A76256DBE8",
+  "appSecret": "92c919ccd2ca6fa9e0f628afa9c3be4a",
+  "encryptJs": true,
+  "excludeScenes": [],
+  "includeAnySDK": true,
+  "includeSDKBox": false,
+  "inlineSpriteFrames": true,
+  "inlineSpriteFrames_native": true,
+  "jailbreakPlatform": false,
+  "md5Cache": false,
+  "mergeStartScene": false,
+  "oauthLoginServer": "http://oauth.anysdk.com/api/OauthLoginDemo/Login.php",
+  "optimizeHotUpdate": false,
+  "orientation": {
+    "landscapeLeft": true,
+    "landscapeRight": true,
+    "portrait": false,
+    "upsideDown": false
+  },
+  "packageName": "com.xingniu.game",
+  "privateKey": "CF115E1D871C7D2FA4D4D0B1167C77E4",
+  "renderMode": "0",
+  "startScene": "13a3a5a5-e6e3-47ba-8632-60d086712736",
+  "title": "DDZClient",
+  "webOrientation": "auto",
+  "wechatgame": {
+    "appid": "",
+    "orientation": "portrait"
+  },
+  "xxteaKey": "a83e5906-781a-40",
+  "zipCompressJs": true
+}

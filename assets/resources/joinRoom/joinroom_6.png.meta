@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "4fec0538-eb44-4766-b5b7-69aecb1fd806",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "joinroom_6": {
+      "ver": "1.0.3",
+      "uuid": "2e587658-ac23-4769-9331-97468750c6d1",
+      "rawTextureUuid": "4fec0538-eb44-4766-b5b7-69aecb1fd806",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 25,
+      "height": 35,
+      "rawWidth": 25,
+      "rawHeight": 35,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

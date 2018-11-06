@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "e845d076-f360-4247-a445-4162de531317",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "norobIcon": {
+      "ver": "1.0.3",
+      "uuid": "492cef4f-d416-4296-ac96-2e24d1143900",
+      "rawTextureUuid": "e845d076-f360-4247-a445-4162de531317",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 85,
+      "height": 44,
+      "rawWidth": 85,
+      "rawHeight": 44,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

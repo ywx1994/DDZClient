@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "5d165125-40db-42d6-bb10-5e1037103e18",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "robIcon": {
+      "ver": "1.0.3",
+      "uuid": "79b99e47-5175-4b7d-b613-75b878ecbcaa",
+      "rawTextureUuid": "5d165125-40db-42d6-bb10-5e1037103e18",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0.5,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 127,
+      "height": 43,
+      "rawWidth": 127,
+      "rawHeight": 44,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

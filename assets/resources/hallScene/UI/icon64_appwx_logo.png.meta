@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "9f176d32-790f-4eda-a8d3-812bc0284c6f",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "icon64_appwx_logo": {
+      "ver": "1.0.3",
+      "uuid": "ac27670f-bb3d-494e-8c75-5c0b1f97aec4",
+      "rawTextureUuid": "9f176d32-790f-4eda-a8d3-812bc0284c6f",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 64,
+      "height": 64,
+      "rawWidth": 64,
+      "rawHeight": 64,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}
