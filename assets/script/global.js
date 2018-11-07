@@ -5,6 +5,7 @@ global.playerData = {};
 global.eventListener = new EventListener();
 global.joinRoomData = {};
 global.tip = '';
+global.firstToHall = false;
 global.systemInfo = undefined;
 global.playVolume = 0.5;
 global.bgmVolume = 0.05;

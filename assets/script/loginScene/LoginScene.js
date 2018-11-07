@@ -1,4 +1,5 @@
 import global from "./../global"
+
 var UnitTools = require("../tools/UnitTools.js");
 cc.Class({
     extends: cc.Component,
@@ -13,9 +14,10 @@ cc.Class({
     },
 
     start() {
-        /**
-         * 666666666666666666666666666
-         */
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6b1bf129451265f46b82d0687ea11dd590c21b69
     },
 
     onLoad() {
@@ -33,21 +35,21 @@ cc.Class({
                     case anysdk.UserActionResultCode.kLoginSuccess:
                         let userInfo = cc.userPlugin.getUserInfo();
                         let userInfoJson = JSON.parse(userInfo);
-                        UnitTools.request("http://127.0.0.1:3001/weixinRegister",{
-                            uid:userInfoJson.uid,
-                            nickName:encodeURI(userInfoJson.nickName),
-                            avatarUrl:userInfoJson.avatarUrl,
-                            sex:userInfoJson.sex,
-                            city:userInfoJson.city,
-                            platform:cc.sys.os
-                        },(err, data)=> {
+                        UnitTools.request("http://127.0.0.1:3001/weixinRegister", {
+                            uid: userInfoJson.uid,
+                            nickName: encodeURI(userInfoJson.nickName),
+                            avatarUrl: userInfoJson.avatarUrl,
+                            sex: userInfoJson.sex,
+                            city: userInfoJson.city,
+                            platform: cc.sys.os
+                        }, (err, data) => {
                             if (err) {
                                 global.tip = "登陆失败";
                                 let tips = cc.instantiate(this.tipsPrefab);
                                 tips.parent = this.node;
                             } else {
                                 let playerData = JSON.parse(data);
-                                if (!playerData.ok){
+                                if (!playerData.ok) {
                                     global.tip = "登陆失败";
                                     let tips = cc.instantiate(this.tipsPrefab);
                                     tips.parent = this.node;
@@ -55,12 +57,13 @@ cc.Class({
                                     cc.sys.localStorage.setItem('uid', userInfoJson.uid);//存uid到本地
                                     global.playerData.accountID = playerData.accountID;
                                     global.netWorkManager.connectAndAuthToHall(playerData.hallIP);
-                                    global.netWorkManager.onConnectedToHall(()=>{
+                                    global.netWorkManager.onConnectedToHall(() => {
+                                        global.firstToHall = true;
                                         cc.director.loadScene('HallScene');
                                     })
                                 }
                             }
-                        },5000);
+                        }, 5000);
                         break;
                     case
                     anysdk.UserActionResultCode.kLoginFail:
@@ -88,17 +91,17 @@ cc.Class({
         cc.sys.localStorage.setItem('uid', "zzz");
         var localUID = cc.sys.localStorage.getItem('uid');
         if (localUID && localUID !== "") {
-            UnitTools.request("http://127.0.0.1:3001/weixinlogin",{
-                uid:localUID,
-                platform:cc.sys.os
-            },(err, data)=> {
+            UnitTools.request("http://127.0.0.1:3001/weixinlogin", {
+                uid: localUID,
+                platform: cc.sys.os
+            }, (err, data) => {
                 if (err) {
                     global.tip = "登陆失败";
                     let tips = cc.instantiate(this.tipsPrefab);
                     tips.parent = this.node;
                 } else {
                     let playerData = JSON.parse(data);
-                    if (!playerData.ok){
+                    if (!playerData.ok) {
                         global.tip = "登陆失败";
                         let tips = cc.instantiate(this.tipsPrefab);
                         tips.parent = this.node;
@@ -106,12 +109,13 @@ cc.Class({
                         console.log(playerData.hallIP);
                         global.playerData.accountID = playerData.accountID;
                         global.netWorkManager.connectAndAuthToHall(playerData.hallIP);
-                        global.netWorkManager.onConnectedToHall(()=>{
+                        global.netWorkManager.onConnectedToHall(() => {
+                            global.firstToHall = true;
                             cc.director.loadScene('HallScene');
                         })
                     }
                 }
-            },5000);
+            }, 5000);
         }
 
 

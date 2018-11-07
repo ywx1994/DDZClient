@@ -294,7 +294,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 552.78,
+      "width": 553,
       "height": 15
     },
     "_rotationX": 0,
@@ -420,7 +420,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 48.04,
+      "width": 48.34,
       "height": 15
     },
     "_rotationX": 0,
@@ -2106,7 +2106,11 @@
     },
     "_enabled": true,
     "_defaultClip": null,
-    "_clips": [],
+    "_clips": [
+      {
+        "__uuid__": "c7850682-21d2-4ce1-a3ee-5657d62923fc"
+      }
+    ],
     "playOnLoad": false
   }
 ]

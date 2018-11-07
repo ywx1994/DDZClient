@@ -38,12 +38,12 @@ cc.Class({
         roomConfig: cc.Prefab,
         roomListContent: cc.Node,
         roomListNode: cc.Node,
+        noticeNode:cc.Label
     },
 
     onLoad() {
         global.hallScene = this.node;
         this.loading = undefined;
-
         this.bgm = cc.audioEngine.play(cc.url.raw('resources/audio/hallMusic.mp3'), true, global.bgmVolume);
         //微信分享
         if (cc.sys.isMobile && cc.sharePlugin === undefined) {
@@ -76,36 +76,53 @@ cc.Class({
             }, this);
         }
 
-            global.hallService.proxy.refreshSelfInfo(data=>{
-                global.playerData.account_id = data.info.accountID;
-                global.playerData.nick_name = data.info.nickName;
-                global.playerData.avatar_url = data.info.avatarUrl;
-                global.playerData.gold_count = data.info.gold;
-                global.playerData.daimond_count = data.info.diamond;
-                global.playerData.sex = data.info.sex;
-                global.playerData.city = data.info.city;
-                global.playerData.loginIP = data.info.ip;
-                global.playerData.createDate = data.info.createDate;
-                global.playerData.totalGames = data.info.totalGame;
-                global.playerData.ranking = data.info.ranking;
-
-                //todo 用户信息每次到hallScene时都应该重新加载
-                this.playerName.string = decodeURI(global.playerData.nick_name);
-                this.playerID.string = "ID:" + global.playerData.account_id;
-                cc.loader.load({url: global.playerData.avatar_url, type: 'jpg'}, (err, tex) => {
-                    //cc.log('Should load a texture from RESTful API by specify the type: ' + (tex instanceof cc.Texture2D));
-                    let oldWidth = this.headImg.node.width;
-                    this.headImg.spriteFrame = new cc.SpriteFrame(tex);
-                    let newWidth = this.headImg.node.width;
-                    this.headImg.node.scale = oldWidth / newWidth;
-                });
-                this.daimondNum.string = global.playerData.daimond_count;
-                if (global.playerData.sex === 1) {
-                    this.sexImg.spriteFrame = this.male;
+        if (global.firstToHall){
+            console.log('此处应有广告弹出！');
+            global.firstToHall = false;
+            global.hallService.proxy.systemInfo(data=>{
+                if (!data.ok) {
+                    console.log('** hallScene ** requestSystemInfo has err');
                 } else {
-                    this.sexImg.spriteFrame = this.famale;
+                    let systemInfo = cc.instantiate(this.systemInfoPrefab);
+                    systemInfo.parent = this.node;
+                    if (data !== undefined) {
+                        global.systemInfo = data.info;
+                        systemInfo.getComponent('syetemInfo').initWithData(data.info);
+                    }
                 }
             });
+        }
+
+        global.hallService.proxy.refreshSelfInfo(data => {
+            global.playerData.account_id = data.info.accountID;
+            global.playerData.nick_name = data.info.nickName;
+            global.playerData.avatar_url = data.info.avatarUrl;
+            global.playerData.gold_count = data.info.gold;
+            global.playerData.daimond_count = data.info.diamond;
+            global.playerData.sex = data.info.sex;
+            global.playerData.city = data.info.city;
+            global.playerData.loginIP = data.info.ip;
+            global.playerData.createDate = data.info.createDate;
+            global.playerData.totalGames = data.info.totalGame;
+            global.playerData.ranking = data.info.ranking;
+
+            //todo 用户信息每次到hallScene时都应该重新加载
+            this.playerName.string = decodeURI(global.playerData.nick_name);
+            this.playerID.string = "ID:" + global.playerData.account_id;
+            cc.loader.load({url: global.playerData.avatar_url, type: 'jpg'}, (err, tex) => {
+                //cc.log('Should load a texture from RESTful API by specify the type: ' + (tex instanceof cc.Texture2D));
+                let oldWidth = this.headImg.node.width;
+                this.headImg.spriteFrame = new cc.SpriteFrame(tex);
+                let newWidth = this.headImg.node.width;
+                this.headImg.node.scale = oldWidth / newWidth;
+            });
+            this.daimondNum.string = global.playerData.daimond_count;
+            if (global.playerData.sex === 1) {
+                this.sexImg.spriteFrame = this.male;
+            } else {
+                this.sexImg.spriteFrame = this.famale;
+            }
+        });
 
         //展示游戏详细记录（oneGameRusult发出的）
         this.node.on('show_detail_result', (data) => {
@@ -137,6 +154,10 @@ cc.Class({
     },
 
     start() {
+        let action1 = cc.moveTo(0, 250+this.noticeNode.node.width/2, 0);
+        let action2 = cc.moveBy(this.noticeNode.node.width/50,-500-this.noticeNode.node.width,0);
+        let seq1 = cc.repeatForever(cc.sequence(action1, action2));
+        this.noticeNode.node.runAction(seq1);
         //---------------------产生动态界面的效果-----------------------
         // let action1 = cc.moveBy(1.3, 0, 10);
         // let action2 = cc.moveBy(1.3, 0, -10);
@@ -187,15 +208,15 @@ cc.Class({
                         rooms[i].destroy();
                     }
                 } else {
-                       global.hallService.proxy.searchRoomList(data=>{
-                           if (data.ok) {
-                               for (let i = 0; i < data.roomList.length; i++) {
-                                   let room = cc.instantiate(this.roomConfig);
-                                   room.parent = this.roomListContent;
-                                   room.getComponent('roomConfig').initWithData(data.roomList[i]);
-                               }
-                           }
-                       });
+                    global.hallService.proxy.searchRoomList(data => {
+                        if (data.ok) {
+                            for (let i = 0; i < data.roomList.length; i++) {
+                                let room = cc.instantiate(this.roomConfig);
+                                room.parent = this.roomListContent;
+                                room.getComponent('roomConfig').initWithData(data.roomList[i]);
+                            }
+                        }
+                    });
                     this.roomListNode.runAction(cc.moveBy(0.3, 630, 0));
                     this.roomListBG.active = true;
                 }
@@ -221,38 +242,38 @@ cc.Class({
                 break;
             case 'record':          //战绩
                 console.log("战绩");
-                    global.hallService.proxy.gameRecord("ddz",data=>{
-                        if (!data.ok) {
-                            console.log('** HallScene ** requestGameRecord err' );
-                        } else {
-                            console.log('** HallScene ** requestGameRecord data=' + JSON.stringify(data.record));
-                            let gameResult = cc.instantiate(this.gameResultHall);
-                            gameResult.parent = this.node;
-                            gameResult.getComponent('gameResultHall').initWithData(data.record);
-                        }
-                    });
+                global.hallService.proxy.gameRecord("ddz", data => {
+                    if (!data.ok) {
+                        console.log('** HallScene ** requestGameRecord err');
+                    } else {
+                        console.log('** HallScene ** requestGameRecord data=' + JSON.stringify(data.record));
+                        let gameResult = cc.instantiate(this.gameResultHall);
+                        gameResult.parent = this.node;
+                        gameResult.getComponent('gameResultHall').initWithData(data.record);
+                    }
+                });
                 break;
-            case 'system_info':    //系统信息
-                console.log("系统信息");
-                if (global.systemInfo !== undefined) {
-                    let systemInfo = cc.instantiate(this.systemInfoPrefab);
-                    systemInfo.parent = this.node;
-                    systemInfo.getComponent('syetemInfo').initWithData(global.systemInfo);
-                } else {
-                       global.hallService.proxy.systemInfo(data=>{
-                           if (!data.ok) {
-                               console.log('** hallScene ** requestSystemInfo err=' );
-                           } else {
-                               let systemInfo = cc.instantiate(this.systemInfoPrefab);
-                               systemInfo.parent = this.node;
-                               if (data !== undefined) {
-                                   global.systemInfo = data.info;
-                                   systemInfo.getComponent('syetemInfo').initWithData(data.info);
-                               }
-                           }
-                       });
-                }
-                break;
+            // case 'system_info':    //系统信息
+            //     console.log("系统信息");
+            //     if (global.systemInfo !== undefined) {
+            //         let systemInfo = cc.instantiate(this.systemInfoPrefab);
+            //         systemInfo.parent = this.node;
+            //         systemInfo.getComponent('syetemInfo').initWithData(global.systemInfo);
+            //     } else {
+            //            global.hallService.proxy.systemInfo(data=>{
+            //                if (!data.ok) {
+            //                    console.log('** hallScene ** requestSystemInfo err=' );
+            //                } else {
+            //                    let systemInfo = cc.instantiate(this.systemInfoPrefab);
+            //                    systemInfo.parent = this.node;
+            //                    if (data !== undefined) {
+            //                        global.systemInfo = data.info;
+            //                        systemInfo.getComponent('syetemInfo').initWithData(data.info);
+            //                    }
+            //                }
+            //            });
+            //     }
+            //     break;
             case 'share':           //分享
                 console.log("分享");
                 let hallShare = cc.instantiate(this.hallSharePrefab);
