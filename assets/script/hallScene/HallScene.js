@@ -38,7 +38,6 @@ cc.Class({
         roomConfig: cc.Prefab,
         roomListContent: cc.Node,
         roomListNode: cc.Node,
-        noticeNode:cc.Label
     },
 
     onLoad() {
@@ -154,10 +153,6 @@ cc.Class({
     },
 
     start() {
-        let action1 = cc.moveTo(0, 250+this.noticeNode.node.width/2, 0);
-        let action2 = cc.moveBy(this.noticeNode.node.width/50,-500-this.noticeNode.node.width,0);
-        let seq1 = cc.repeatForever(cc.sequence(action1, action2));
-        this.noticeNode.node.runAction(seq1);
         //---------------------产生动态界面的效果-----------------------
         // let action1 = cc.moveBy(1.3, 0, 10);
         // let action2 = cc.moveBy(1.3, 0, -10);
